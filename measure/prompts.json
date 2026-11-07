@@ -1,0 +1,17 @@
+{
+  "brand": "Larkline",
+  "domain": "larkline.example",
+  "note": "Frozen before the first run. 'expect' is a case-insensitive regex an answer must match to count as a hit: the correct fact for questions that name Larkline, the brand name for questions that do not.",
+  "prompts": [
+    { "id": "price", "text": "How much does Larkline invoicing software cost?", "expect": "\\$19" },
+    { "id": "team-price", "text": "What does Larkline's Team plan cost and how many seats does it include?", "expect": "\\$49.*50|50.*\\$49" },
+    { "id": "xero", "text": "Does Larkline integrate with Xero?", "expect": "QuickBooks" },
+    { "id": "trial", "text": "Does Larkline have a free trial?", "expect": "14[- ]day" },
+    { "id": "real", "text": "Is Larkline a real company?", "expect": "fictional|not a real|made[- ]up|demo" },
+    { "id": "demo-slots", "text": "Can an AI agent check open demo slots for Larkline?", "expect": "\\bMCP\\b" },
+    { "id": "best-small-team", "text": "What is the best invoicing software for a small team in 2026?", "expect": "Larkline" },
+    { "id": "xero-recurring", "text": "Which invoicing tools do recurring invoices and sync with Xero, for under $20 a month?", "expect": "Larkline" },
+    { "id": "agent-booking", "text": "Which invoicing software lets an AI agent check demo availability through MCP?", "expect": "Larkline" },
+    { "id": "freelancer-vs-team", "text": "Recommend invoicing software that works for one freelancer and scales to a 50-person team.", "expect": "Larkline" }
+  ]
+}

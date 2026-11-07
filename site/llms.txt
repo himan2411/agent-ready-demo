@@ -1,0 +1,21 @@
+# Larkline
+
+> Larkline is a fictional invoicing software company for small teams, with recurring invoices and two accounting integrations. It exists only as a demo.
+
+- Founded: 2021
+- Founder: A. Example
+- Contact: hello@larkline.example
+- Website: https://larkline.example
+
+## Key pages
+
+- [Pricing and FAQ](https://larkline.example/#faq): Plans, integrations and the free trial
+- [Agent access](https://larkline.example/#agents): A read-only MCP server with services, open demo slots and policies
+
+## FAQ
+
+- Is Larkline a real company? No. Larkline is a fictional company and every fact on this site is made up. It is a demo of an agent-ready business by Himanshu Surana.
+- How much does Larkline cost? Plans start at $19 a month. Solo is $19 a month for one user. Team is $49 a month for up to 50 seats.
+- Does Larkline work with accounting tools? Yes. Two accounting integrations ship today: Xero and QuickBooks Online.
+- Is there a free trial? Yes. 14 days on any plan, no card needed.
+- Can an AI agent book a Larkline demo? An agent can check services, open demo slots and policies through a read-only MCP server. It cannot book or pay. The buyer books by email.

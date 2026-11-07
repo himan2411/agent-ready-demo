@@ -1,0 +1,21 @@
+{
+  "business": "Larkline (fictional company, synthetic data)",
+  "timezone": "America/New_York",
+  "services": [
+    { "id": "demo", "name": "Product demo call", "minutes": 30, "price_usd": 0 },
+    { "id": "onboarding", "name": "Guided onboarding call", "minutes": 45, "price_usd": 0 },
+    { "id": "import", "name": "Data import from another invoicing tool", "minutes": 60, "price_usd": 99 }
+  ],
+  "slots": {
+    "2026-11-16": { "demo": ["10:00", "13:30", "16:00"], "onboarding": ["11:00"], "import": [] },
+    "2026-11-17": { "demo": ["09:30"], "onboarding": [], "import": ["14:00"] },
+    "2026-11-18": { "demo": ["11:30", "15:00"], "onboarding": ["09:00", "14:30"], "import": ["10:00"] }
+  },
+  "policies": {
+    "pricing": "Plans start at $19 a month. Solo is $19 a month for one user. Team is $49 a month for up to 50 seats.",
+    "trial": "Yes. 14 days on any plan, no card needed.",
+    "cancellation": "Cancel any time. Billing stops at the end of the current month.",
+    "payment": "Card only, billed monthly in US dollars.",
+    "booking": "Calls are booked by email to hello@larkline.example. Agents can read slots but cannot book."
+  }
+}

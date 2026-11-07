@@ -1,0 +1,14 @@
+[
+  {
+    "name": "openai-search",
+    "url": "https://api.openai.com/v1/chat/completions",
+    "key_env": "OPENAI_API_KEY",
+    "body": { "model": "gpt-5-search-api", "web_search_options": {} }
+  },
+  {
+    "name": "perplexity",
+    "url": "https://api.perplexity.ai/chat/completions",
+    "key_env": "PERPLEXITY_API_KEY",
+    "body": { "model": "sonar" }
+  }
+]
