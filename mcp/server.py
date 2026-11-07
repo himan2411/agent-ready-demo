@@ -93,6 +93,7 @@ def handle(msg):
 
 
 def main():
+    sys.stdin.reconfigure(errors="replace")  # a non-UTF-8 line becomes a parse error, not a crash
     for line in sys.stdin:
         if not line.strip():
             continue

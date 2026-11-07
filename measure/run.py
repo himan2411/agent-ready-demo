@@ -29,8 +29,10 @@ def ask(engine, key, text):
 def main():
     try:
         repeats = int(sys.argv[1]) if len(sys.argv) > 1 else 3
+        if repeats < 1:
+            raise ValueError
     except ValueError:
-        sys.exit("usage: python3 measure/run.py [repeats, a whole number]")
+        sys.exit("usage: python3 measure/run.py [repeats, a whole number of 1 or more]")
     ready = [e for e in ENGINES if os.environ.get(e["key_env"])]
     for e in ENGINES:
         if e not in ready:

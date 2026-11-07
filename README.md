@@ -11,7 +11,7 @@ I use it to show both halves of the job in one place:
 
 - `surface/facts.json`: the business facts, written once.
 - `surface/build.js`: builds `site/index.html` (with Organization and FAQPage JSON-LD) and `site/llms.txt` from those facts. `surface/generator.js` is copied unchanged from the structured data generator on my site.
-- `mcp/server.py`: the read-only MCP availability server from my site, with Larkline's data in `mcp/data.json`. The only change is two tool descriptions.
+- `mcp/server.py`: adapted from the read-only MCP availability server on my site. I changed two tool descriptions and added input checks, so a malformed request gets an error instead of ending the session. Larkline's data is in `mcp/data.json`.
 - `smoke_test.py`: a scripted agent opens one MCP session and answers three buyer questions. It fails if the MCP server and the published site disagree on price or trial, or if a malformed request ends the session.
 - `measure/`: the prompt set (`prompts.json`), the engines (`engines.json`), the runner (`run.py`) and the scorer (`score.py`). Raw answers land in `measure/answers/<date>.jsonl`.
 
@@ -34,7 +34,7 @@ OPENAI_API_KEY=... PERPLEXITY_API_KEY=... python3 measure/run.py 3   # each prom
 python3 measure/score.py
 ```
 
-Engines without a key are skipped. Model names in `engines.json` are as of November 2026; check the provider's docs if a request fails.
+Engines without a key are skipped. Before reporting a count, I read the raw answers behind it and correct any the regex got wrong. Model names in `engines.json` are as of November 2026; check the provider's docs if a request fails.
 
 ## Results
 

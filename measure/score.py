@@ -19,7 +19,7 @@ UNKNOWN = re.compile(
     r"\b(could ?n[o']t|can ?n[o']t|cannot|unable to|did ?n[o']t|was ?n[o']t able to) (find|verify|locate|confirm)"
     r"|\bno (public |reliable |specific |verified )?(information|evidence|record|reviews?|data|details|mention)"
     r"|\bnot (aware|familiar)|\bdo ?n[o']t have (any )?(specific |reliable )?information"
-    r"|\bdoes ?n[o']t appear|\b(does ?n[o']t|do ?n[o']t|does not|do not) (offer|have|provide|support)",
+    r"|\bdoes ?n[o']t appear",
     FLAGS,
 )
 
@@ -32,7 +32,8 @@ def sources(raw):
 
 
 def is_hit(answer, brand, expect):
-    return bool(answer and brand.search(answer) and expect.search(answer) and not UNKNOWN.search(answer))
+    answer = (answer or "").replace("\u2019", "'")  # models often write couldn\u2019t with a curly apostrophe
+    return bool(brand.search(answer) and expect.search(answer) and not UNKNOWN.search(answer))
 
 
 def score(records, config):
