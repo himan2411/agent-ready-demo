@@ -53,7 +53,7 @@ ${faq}
     <ul>
       <li><a href="llms.txt">llms.txt</a> has the same facts as plain text.</li>
       <li>This page carries Organization and FAQPage JSON-LD that matches the answers above word for word.</li>
-      <li>A read-only MCP server answers <code>list_services</code>, <code>get_availability</code> and <code>get_policies</code>.</li>
+      <li>A read-only MCP server answers <code>list_services</code>, <code>get_availability</code> and <code>get_policies</code>. Its code is in <a href="https://github.com/himan2411/agent-ready-demo/tree/main/mcp">the demo's repository</a>; run it with <code>python3 mcp/server.py</code>.</li>
     </ul>
   </main>
 </body>

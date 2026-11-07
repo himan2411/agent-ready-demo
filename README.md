@@ -4,15 +4,15 @@ Larkline is a fictional invoicing software company. It does not exist, and every
 
 I use it to show both halves of the job in one place:
 
-1. **Make the business agent-ready.** Give it a surface that agents can read and query: a page with JSON-LD, an `llms.txt`, and a read-only MCP server with services, open demo slots and policies. All three state the same facts word for word.
-2. **Measure whether AI answers pick it up.** A frozen set of buyer questions goes to AI answer engines, the raw answers are kept, and each result is a plain count: n of N answers got the fact right, n of N cited the site.
+1. **Make the business agent-ready.** Give it a surface that agents can read and query: a page with JSON-LD, an `llms.txt`, and a read-only MCP server with services, open demo slots and policies. The page and `llms.txt` are built from one facts file. The MCP server quotes the same pricing and trial text word for word, and the smoke test checks that.
+2. **Measure whether AI answers pick it up.** A frozen set of buyer questions goes to AI answer engines, the raw answers are kept, and each result is a plain count: n of N answers named Larkline and got the fact right, and n of N listed the site among their sources.
 
 ## What is in it
 
 - `surface/facts.json`: the business facts, written once.
 - `surface/build.js`: builds `site/index.html` (with Organization and FAQPage JSON-LD) and `site/llms.txt` from those facts. `surface/generator.js` is copied unchanged from the structured data generator on my site.
 - `mcp/server.py`: the read-only MCP availability server from my site, with Larkline's data in `mcp/data.json`. The only change is two tool descriptions.
-- `smoke_test.py`: a scripted agent opens one MCP session and answers three buyer questions. It fails if the MCP server and the published site disagree on price or trial.
+- `smoke_test.py`: a scripted agent opens one MCP session and answers three buyer questions. It fails if the MCP server and the published site disagree on price or trial, or if a malformed request ends the session.
 - `measure/`: the prompt set (`prompts.json`), the engines (`engines.json`), the runner (`run.py`) and the scorer (`score.py`). Raw answers land in `measure/answers/<date>.jsonl`.
 
 ## Run it
@@ -22,7 +22,7 @@ Python 3.11 or newer and Node 18 or newer. Nothing to install.
 ```sh
 node surface/build.js          # rebuild site/ after editing surface/facts.json
 python3 smoke_test.py          # agent smoke test against the MCP server
-python3 measure/test_score.py  # checks the scoring rules
+python3 measure/test_score.py  # scoring rules: 9 answers that do not know Larkline must miss, 9 correct ones must hit
 ```
 
 To use the server from an MCP client, point it at `python3 mcp/server.py`.
@@ -59,4 +59,4 @@ I also connected to the server with the official MCP Python SDK client (version 
 ## Limits
 
 - The MCP server speaks stdio, so it works for local agents. A remote agent would need it served over HTTP.
-- The scoring is a regex per question. It is simple to check by hand against the raw answers, which is the point, but it can miss a correct answer phrased in an unexpected way.
+- The scoring is a regex per question, plus a rule that an answer which says it cannot find or verify Larkline is a miss. It is simple to check by hand, which is the point, but it can still count a wrong answer as a hit or miss a correct one phrased in an unexpected way. The raw answers are the ground truth; read them before trusting a count.
