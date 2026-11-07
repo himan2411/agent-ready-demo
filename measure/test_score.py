@@ -18,10 +18,14 @@ MISS = [
     ("xero-recurring", "FreshBooks and Zoho Invoice both sync with Xero for under $20 a month."),
     ("agent-booking", "I'm not aware of any invoicing tool, Larkline included, that offers MCP for demo availability."),
     ("price", "I couldn\u2019t find any information about Larkline. Most invoicing tools start around $19 a month."),
+    ("price", "I can't find any information about Larkline. Most tools start around $19 a month."),
+    ("trial", "I can\u2019t verify that Larkline exists. Most tools offer a 14-day trial."),
 ]
 # Answers that state Larkline's facts. Each must score as a hit.
+PRICE_HIT = "Larkline plans start at $19 a month."
 HIT = [
-    ("price", "Larkline plans start at $19 a month."),
+    ("price", PRICE_HIT),
+    ("demo-slots", "Larkline lists open demo slots through a read-only MCP server. An agent can't book."),
     ("team-price", "Larkline's Team plan is $49 a month for up to 50 seats."),
     ("xero", "Yes. Larkline ships two accounting integrations: Xero and QuickBooks Online."),
     ("trial", "Yes, Larkline has a 14-day free trial on any plan, no card needed."),
@@ -46,13 +50,13 @@ assert not missed, f"correct answers scored as misses: {missed}"
 # Counting, errors, citations and stray records.
 cite = "https://larkline.example/#faq"
 records = [
-    {"engine": "a", "prompt_id": "price", "answer": HIT[0][1], "raw": {"citations": [cite]}},
+    {"engine": "a", "prompt_id": "price", "answer": PRICE_HIT, "raw": {"citations": [cite]}},
     {"engine": "a", "prompt_id": "price", "answer": "See larkline.example. Larkline is $29.",
      "raw": {"choices": [{"message": {"content": "See larkline.example. Larkline is $29."}}]}},
     {"engine": "a", "prompt_id": "price", "error": "HTTP 429 Too Many Requests"},
     {"engine": "a", "prompt_id": "price", "answer": None, "raw": {}},
-    {"engine": "b", "prompt_id": "price", "answer": HIT[0][1],
-     "raw": {"choices": [{"message": {"content": HIT[0][1], "annotations": [{"url_citation": {"url": cite}}]}}]}},
+    {"engine": "b", "prompt_id": "price", "answer": PRICE_HIT,
+     "raw": {"choices": [{"message": {"content": PRICE_HIT, "annotations": [{"url_citation": {"url": cite}}]}}]}},
     {"engine": "b", "prompt_id": "retired-prompt", "answer": "x", "raw": {}},
 ]
 c = score(records, CONFIG)

@@ -16,7 +16,7 @@ from pathlib import Path
 HERE = Path(__file__).parent
 FLAGS = re.IGNORECASE | re.DOTALL
 UNKNOWN = re.compile(
-    r"\b(could ?n[o']t|can ?n[o']t|cannot|unable to|did ?n[o']t|was ?n[o']t able to) (find|verify|locate|confirm)"
+    r"\b(could ?n[o']t|can'?t|can ?not|unable to|did ?n[o']t|was ?n[o']t able to) (find|verify|locate|confirm)"
     r"|\bno (public |reliable |specific |verified )?(information|evidence|record|reviews?|data|details|mention)"
     r"|\bnot (aware|familiar)|\bdo ?n[o']t have (any )?(specific |reliable )?information"
     r"|\bdoes ?n[o']t appear",
@@ -32,7 +32,7 @@ def sources(raw):
 
 
 def is_hit(answer, brand, expect):
-    answer = (answer or "").replace("\u2019", "'")  # models often write couldn\u2019t with a curly apostrophe
+    answer = (answer or "").replace("\u2019", "'")  # models often write a curly apostrophe (’)
     return bool(brand.search(answer) and expect.search(answer) and not UNKNOWN.search(answer))
 
 

@@ -93,10 +93,16 @@ assert s.tool("get_availability", service="demo", date="20261117")["structuredCo
 unpublished = s.tool("get_availability", service="demo", date="2026-12-01")
 assert unpublished["isError"] and "No schedule published" in unpublished["content"][0]["text"], \
     "a date with no schedule must not look fully booked"
-s.proc.stdin.buffer.write(b"\xff\xfe\n")  # not UTF-8
-s.proc.stdin.buffer.flush()
-line = s.proc.stdout.readline()
-assert line and json.loads(line)["error"]["code"] == -32700, "a non-UTF-8 line must be a parse error, not end the session"
+bad_lines = [
+    b"\xff\xfe",  # not UTF-8
+    b'{"jsonrpc": "2.0", "id": ' + b"9" * 5000 + b', "method": "ping"}',  # past Python's integer parse limit
+    b"[" * 100000 + b"]" * 100000,  # deeper than the parser's recursion limit on some versions
+]
+for bad in bad_lines:
+    s.proc.stdin.buffer.write(bad + b"\n")
+    s.proc.stdin.buffer.flush()
+    line = s.proc.stdout.readline()
+    assert line and json.loads(line)["error"]["code"] in (-32700, -32600), f"{bad[:30]!r}... must get an error, not end the session"
 assert s.send("ping")["result"] == {}
 
 s.close()

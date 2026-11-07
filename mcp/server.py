@@ -99,7 +99,7 @@ def main():
             continue
         try:
             msg = json.loads(line)
-        except json.JSONDecodeError:
+        except (ValueError, RecursionError):  # bad JSON, a huge integer, or very deep nesting
             reply = {"jsonrpc": "2.0", "id": None, "error": {"code": -32700, "message": "Parse error"}}
         else:
             try:

@@ -22,7 +22,7 @@ Python 3.11 or newer and Node 18 or newer. Nothing to install.
 ```sh
 node surface/build.js          # rebuild site/ after editing surface/facts.json
 python3 smoke_test.py          # agent smoke test against the MCP server
-python3 measure/test_score.py  # scoring rules: 9 answers that do not know Larkline must miss, 9 correct ones must hit
+python3 measure/test_score.py  # scoring rules: answers that do not know Larkline must miss, correct ones must hit
 ```
 
 To use the server from an MCP client, point it at `python3 mcp/server.py`.
