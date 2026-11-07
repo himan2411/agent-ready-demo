@@ -16,7 +16,7 @@ from pathlib import Path
 HERE = Path(__file__).parent
 FLAGS = re.IGNORECASE | re.DOTALL
 UNKNOWN = re.compile(
-    r"\b(could ?n[o']t|can'?t|can ?not|unable to|did ?n[o']t|was ?n[o']t able to) (find|verify|locate|confirm)"
+    r"(?<!\byou )\b(could ?n[o']t|can'?t|can ?not|unable to|did ?n[o']t|was ?n[o']t able to) (find|verify|locate|confirm)"  # "if you can't find" is advice
     r"|\bno (public |reliable |specific |verified )?(information|evidence|record|reviews?|data|details|mention)"
     r"|\bnot (aware|familiar)|\bdo ?n[o']t have (any )?(specific |reliable )?information"
     r"|\bdoes ?n[o']t appear",

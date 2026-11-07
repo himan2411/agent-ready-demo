@@ -26,6 +26,8 @@ PRICE_HIT = "Larkline plans start at $19 a month."
 HIT = [
     ("price", PRICE_HIT),
     ("demo-slots", "Larkline lists open demo slots through a read-only MCP server. An agent can't book."),
+    ("demo-slots", "Yes. Larkline publishes open demo slots via a read-only MCP server. If you can't find a slot that works, email them."),
+    ("price", "Larkline starts at $19 a month. If you can\u2019t find the plan you need, contact sales."),
     ("team-price", "Larkline's Team plan is $49 a month for up to 50 seats."),
     ("xero", "Yes. Larkline ships two accounting integrations: Xero and QuickBooks Online."),
     ("trial", "Yes, Larkline has a 14-day free trial on any plan, no card needed."),
